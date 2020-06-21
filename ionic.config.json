@@ -1,0 +1,7 @@
+{
+  "name": "wanderlust",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
