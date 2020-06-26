@@ -4,12 +4,13 @@
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #a70161;
-  --ion-color-primary-rgb: 167, 1, 97;
+  --ion-color-primary: #03811d;
+  --ion-color-primary-rgb: 3,129,29;
   --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #930155;
-  --ion-color-primary-tint: #b01a71;
+  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-shade: #03721a;
+  --ion-color-primary-tint: #1c8e34;
+
 
   /** secondary **/
   --ion-color-secondary: #e43f3f;
@@ -79,29 +80,30 @@
   --ion-toolbar-color: var(--ion-color-primary-contrast);
 }
 
-ion-button {
-  //  --background: blue;
-  //box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.6);
-}
+// ion-button {
+//   //  --background: blue;
+//   //box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.6);
+// }
 
 // .ios {
 //   /** primary **/
 //   --ion-color-primary: #3880ff;
 // }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   /*
    * Dark Colors
    * -------------------------------------------
    */
 
   body {
-    --ion-color-primary: #428cff;
-    --ion-color-primary-rgb: 66, 140, 255;
+    --ion-color-primary: #03811d;
+    --ion-color-primary-rgb: 3,129,29;
     --ion-color-primary-contrast: #ffffff;
-    --ion-color-primary-contrast-rgb: 255, 255, 255;
-    --ion-color-primary-shade: #3a7be0;
-    --ion-color-primary-tint: #5598ff;
+    --ion-color-primary-contrast-rgb: 255,255,255;
+    --ion-color-primary-shade: #03721a;
+    --ion-color-primary-tint: #1c8e34;
+  
 
     --ion-color-secondary: #50c8ff;
     --ion-color-secondary-rgb: 80, 200, 255;
@@ -158,6 +160,9 @@ ion-button {
     --ion-color-light-contrast-rgb: 255, 255, 255;
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
+
+    --ion-toolbar-background: var(--ion-color-primary);
+    --ion-toolbar-color: var(--ion-color-primary-contrast);
   }
 
   /*
@@ -192,7 +197,7 @@ ion-button {
     --ion-color-step-900: #e6e6e6;
     --ion-color-step-950: #f2f2f2;
 
-    --ion-toolbar-background: #0d0d0d;
+    //--ion-toolbar-background: #0d0d0d;
 
     --ion-item-background: #000000;
   }
@@ -233,7 +238,7 @@ ion-button {
 
     --ion-item-background: #1e1e1e;
 
-    --ion-toolbar-background: #1f1f1f;
+    //--ion-toolbar-background: #1f1f1f;
 
     --ion-tab-bar-background: #1f1f1f;
   }

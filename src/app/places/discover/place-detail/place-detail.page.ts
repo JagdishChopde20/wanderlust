@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import {
   NavController,
   ModalController,
   ActionSheetController,
   LoadingController,
+  AlertController,
 } from "@ionic/angular";
 import { Subscription } from "rxjs";
 
@@ -12,7 +13,7 @@ import { PlacesService } from "../../places.service";
 import { Place } from "../../place.model";
 import { CreateBookingComponent } from "../../../bookings/create-booking/create-booking.component";
 import { BookingService } from "src/app/bookings/booking.service";
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from "src/app/auth/auth.service";
 
 @Component({
   selector: "app-place-detail",
@@ -22,6 +23,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class PlaceDetailPage implements OnInit, OnDestroy {
   place: Place;
   isBookable = false;
+  isLoading = false;
   placeSub: Subscription;
 
   constructor(
@@ -33,6 +35,8 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
     private bookingService: BookingService,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
+    private router: Router,
+    private alertCtrl: AlertController
   ) {}
 
   ngOnInit() {
@@ -41,12 +45,28 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
         this.navCtrl.navigateBack("/places/tabs/discover");
         return;
       }
-      this.placesService
-        .getPlace(paramMap.get("placeId"))
-        .subscribe((place) => {
+      this.isLoading = true;
+      this.placesService.getPlace(paramMap.get("placeId")).subscribe(
+        (place) => {
           this.place = place;
           this.isBookable = place.userId !== this.authService.userId;
-        });
+          this.isLoading = false;
+        },
+        (error) => {
+          this.alertCtrl.create({
+            header: "An error ocurred!",
+            message: "Could not load place.",
+            buttons: [
+              {
+                text: "Okay",
+                handler: () => {
+                  this.router.navigate(["/places/tabs/discover"]);
+                },
+              },
+            ],
+          }).then(alertEl => alertEl.present());
+        }
+      );
     });
   }
 
@@ -114,6 +134,7 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
                 )
                 .subscribe(() => {
                   loadingEl.dismiss();
+                  this.router.navigate(["/bookings"]);
                 });
             });
         }
