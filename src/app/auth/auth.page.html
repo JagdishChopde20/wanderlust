@@ -54,7 +54,9 @@
             expand="block"
             fill="solid"
             [disabled]="f.invalid"
-            >Login</ion-button
+            >
+            {{ isLogin ? 'Login' : 'Signup' }}
+            </ion-button
           >
         </ion-col>
       </ion-row>

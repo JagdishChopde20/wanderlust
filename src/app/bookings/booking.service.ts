@@ -39,37 +39,44 @@ export class BookingService {
     dateTo: Date
   ) {
     let generatedId: string;
-    const newBooking = new Booking(
-      Math.random().toString(),
-      placeId,
-      this.authService.userId,
-      placeTitle,
-      placeImage,
-      firstName,
-      lastName,
-      guestNumber,
-      dateFrom,
-      dateTo
-    );
-    return this.http
-      .post<{ name: string }>(
-        "https://wanderlust-jack.firebaseio.com/bookings.json",
-        {
-          ...newBooking,
-          id: null,
+    let newBooking: Booking;
+    return this.authService.userId.pipe(
+      take(1),
+      switchMap((userId) => {
+        if (!userId) {
+          throw new Error("No user id found!");
         }
-      )
-      .pipe(
-        switchMap((resData) => {
-          generatedId = resData.name;
-          return this.bookings;
-        }),
-        take(1),
-        tap((bookings) => {
-          newBooking.id = generatedId;
-          this._bookings.next(bookings.concat(newBooking));
-        })
-      );
+        newBooking = new Booking(
+          Math.random().toString(),
+          placeId,
+          userId,
+          placeTitle,
+          placeImage,
+          firstName,
+          lastName,
+          guestNumber,
+          dateFrom,
+          dateTo
+        );
+
+        return this.http.post<{ name: string }>(
+          "https://wanderlust-jack.firebaseio.com/bookings.json",
+          {
+            ...newBooking,
+            id: null,
+          }
+        );
+      }),
+      switchMap((resData) => {
+        generatedId = resData.name;
+        return this.bookings;
+      }),
+      take(1),
+      tap((bookings) => {
+        newBooking.id = generatedId;
+        this._bookings.next(bookings.concat(newBooking));
+      })
+    );
   }
 
   cancelBooking(bookingId: string) {
@@ -89,37 +96,41 @@ export class BookingService {
   }
 
   fetchBookings() {
-    return this.http
-      .get<{ [key: string]: BookingData }>(
-        `https://wanderlust-jack.firebaseio.com/bookings.json?orderBy="userId"&equalTo="${this.authService.userId}"`
-      )
-      .pipe(
-        map((bookingData) => {
-          const bookings = [];
-          for (const key in bookingData) {
-            if (bookingData.hasOwnProperty(key)) {
-              const element = bookingData[key];
-              bookings.push(
-                new Booking(
-                  key,
-                  element.placeId,
-                  element.userId,
-                  element.placeTitle,
-                  element.placeImage,
-                  element.firstName,
-                  element.lastName,
-                  element.guestNumber,
-                  new Date(element.bookedFrom),
-                  new Date(element.bookedTo)
-                )
-              );
-            }
+    return this.authService.userId.pipe(take(1),
+      switchMap((userId) => {
+        if (!userId) {
+          throw new Error("User not found!");
+        }
+        return this.http.get<{ [key: string]: BookingData }>(
+          `https://wanderlust-jack.firebaseio.com/bookings.json?orderBy="userId"&equalTo="${userId}"`
+        );
+      }),
+      map((bookingData) => {
+        const bookings = [];
+        for (const key in bookingData) {
+          if (bookingData.hasOwnProperty(key)) {
+            const element = bookingData[key];
+            bookings.push(
+              new Booking(
+                key,
+                element.placeId,
+                element.userId,
+                element.placeTitle,
+                element.placeImage,
+                element.firstName,
+                element.lastName,
+                element.guestNumber,
+                new Date(element.bookedFrom),
+                new Date(element.bookedTo)
+              )
+            );
           }
-          return bookings;
-        }),
-        tap((bookings) => {
-          this._bookings.next(bookings);
-        })
-      );
+        }
+        return bookings;
+      }),
+      tap((bookings) => {
+        this._bookings.next(bookings);
+      })
+    );
   }
 }
