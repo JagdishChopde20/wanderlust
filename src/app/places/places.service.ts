@@ -86,7 +86,7 @@ export class PlacesService {
       take(1),
       switchMap((token) => {
         return this.http.get<{ [key: string]: PlaceData }>(
-          `https://wanderlust-jack.firebaseio.com/offered-places.json?auth=${token}`
+          `https://wanderlust-jack.firebaseio.com/offered-places.json?` //auth=${token}
         );
       }),
       map((resData) => {
@@ -122,7 +122,7 @@ export class PlacesService {
       take(1),
       switchMap((token) => {
         return this.http.get<PlaceData>(
-          `https://wanderlust-jack.firebaseio.com/offered-places/${id}.json&auth=${token}`
+          `https://wanderlust-jack.firebaseio.com/offered-places/${id}.json`
         );
       }),
       map((placeData) => {
@@ -142,19 +142,19 @@ export class PlacesService {
   }
 
   uploadImage(image: File) {
-    const uploadData = new FormData();
-    uploadData.append("image", image);
+    // const uploadData = new FormData();
+    // uploadData.append("image", image);
 
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'origin': '*'
-    //   })
-    // };
-    // httpOptions.headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE, OPTIONS');
-    return this.http.post<{ imageUrl: string; imagePath: string }>(
-      "https://us-central1-wanderlust-jack.cloudfunctions.net/storeImage",
-      uploadData
-    );
+    // // const httpOptions = {
+    // //   headers: new HttpHeaders({
+    // //     'origin': '*'
+    // //   })
+    // // };
+    // // httpOptions.headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE, OPTIONS');
+    // return this.http.post<{ imageUrl: string; imagePath: string }>(
+    //   "https://us-central1-wanderlust-jack.cloudfunctions.net/storeImage",
+    //   uploadData
+    // );
   }
 
   // FIREBASE STORAGE UPLOAD
@@ -268,7 +268,7 @@ export class PlacesService {
         );
         console.log(newPlace);
         return this.http.post<{ name: string }>(
-          `https://wanderlust-jack.firebaseio.com/offered-places.json?auth=${token}`,
+          `https://wanderlust-jack.firebaseio.com/offered-places.json?`,//auth=${token}
           { ...newPlace, id: null }
         );
       }),
@@ -325,7 +325,7 @@ export class PlacesService {
           oldPlace.location
         );
         return this.http.put(
-          `https://wanderlust-jack.firebaseio.com/offered-places/${placeId}.json?auth=${fetchedToken}`,
+          `https://wanderlust-jack.firebaseio.com/offered-places/${placeId}.json`,//?auth=${fetchedToken}
           { ...updatedPlaces[updatedPlaceIndex], id: null }
         );
       }),

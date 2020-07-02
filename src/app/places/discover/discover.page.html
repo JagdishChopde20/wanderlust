@@ -29,20 +29,20 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid *ngIf="relevantPlaces.length > 0">
+  <ion-grid *ngIf="listedLoadedPlaces.length > 0">
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
         <ion-card>
           <ion-card-header>
-            <ion-card-title> {{ relevantPlaces[0].title }} </ion-card-title>
+            <ion-card-title> {{ listedLoadedPlaces[0].title }} </ion-card-title>
             <ion-card-subtitle
-              >{{ relevantPlaces[0].price | currency }} / Day</ion-card-subtitle
+              >{{ listedLoadedPlaces[0].price | currency }} / Day</ion-card-subtitle
             >
           </ion-card-header>
-          <ion-img [src]="relevantPlaces[0].imageUrl"></ion-img>
+          <ion-img [src]="listedLoadedPlaces[0].imageUrl"></ion-img>
           <ion-card-content>
             <p>
-              {{ relevantPlaces[0].description }}
+              {{ listedLoadedPlaces[0].description }}
             </p>
           </ion-card-content>
           <div>
@@ -50,7 +50,7 @@
               fill="clear"
               color="primary"
               routerDirection="backward"
-              [routerLink]="['/', 'places', 'tabs', 'discover', relevantPlaces[0].id]"
+              [routerLink]="['/', 'places', 'tabs', 'discover', listedLoadedPlaces[0].id]"
             >
               More
             </ion-button>
@@ -62,7 +62,7 @@
       <ion-col size="12" size-sm="8" offset-sm="2">
         <ion-list>
           <ion-item
-            *ngFor="let place of listedLoadedPlaces"
+            *ngFor="let place of listedLoadedPlaces.slice(1)"
             [routerLink]="['/', 'places', 'tabs', 'discover', place.id]"
             routerDirection="backward"
             detail

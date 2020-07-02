@@ -63,6 +63,7 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
           this.isLoading = false;
         },
         (error) => {
+          console.log(error);
           this.alertCtrl
             .create({
               header: "An error ocurred!",

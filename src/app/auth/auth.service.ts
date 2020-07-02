@@ -113,12 +113,12 @@ export class AuthService implements OnDestroy {
   }
 
   private autoLogout(duration: number) {
-    if (this.activeLogoutTimer) {
-      clearTimeout(this.activeLogoutTimer);
-    }
-    this.activeLogoutTimer = setTimeout(() => {
-      this.logout();
-    }, duration);
+    // if (this.activeLogoutTimer) {
+    //   clearTimeout(this.activeLogoutTimer);
+    // }
+    // this.activeLogoutTimer = setTimeout(() => {
+    //   this.logout();
+    // }, duration);
   }
 
   signup(email: string, password: string) {

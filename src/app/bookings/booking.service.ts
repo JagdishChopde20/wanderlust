@@ -65,7 +65,7 @@ export class BookingService {
           dateTo
         );
         return this.http.post<{ name: string }>(
-          `https://wanderlust-jack.firebaseio.com/bookings.json${token}`,
+          `https://wanderlust-jack.firebaseio.com/bookings.json`, //&auth=${token}
           {
             ...newBooking,
             id: null,
@@ -89,7 +89,7 @@ export class BookingService {
       take(1),
       switchMap((token) => {
         return this.http.delete(
-          `https://wanderlust-jack.firebaseio.com/bookings/${bookingId}.json&auth=${token}`
+          `https://wanderlust-jack.firebaseio.com/bookings/${bookingId}.json`//&auth=${token}
         );
       }),
       switchMap(() => {
@@ -116,7 +116,7 @@ export class BookingService {
       take(1),
       switchMap((token) => {
         return this.http.get<{ [key: string]: BookingData }>(
-          `https://wanderlust-jack.firebaseio.com/bookings.json?orderBy="userId"&equalTo="${fetchedUserId}"&auth=${token}`
+          `https://wanderlust-jack.firebaseio.com/bookings.json?orderBy="userId"&equalTo="${fetchedUserId}"` //&auth=${token}
         );
       }),
       map((bookingData) => {

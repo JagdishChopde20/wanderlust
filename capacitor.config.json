@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "wanderlust",
+  "appId": "com.ionic.wanderlust",
+  "appName": "Wanderlust",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

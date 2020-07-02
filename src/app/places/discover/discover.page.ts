@@ -29,7 +29,7 @@ export class DiscoverPage implements OnInit, OnDestroy {
     this.placesSub = this.placesService.places.subscribe((places) => {
       this.loadedPlaces = places;
       this.relevantPlaces = this.loadedPlaces;
-      this.listedLoadedPlaces = this.relevantPlaces.slice(1);
+      this.listedLoadedPlaces = this.relevantPlaces;//.slice(1);
     });
   }
 
@@ -47,12 +47,12 @@ export class DiscoverPage implements OnInit, OnDestroy {
     this.authService.userId.pipe(take(1)).subscribe((userId) => {
       if (event.detail.value === "all") {
         this.relevantPlaces = this.loadedPlaces;
-        this.listedLoadedPlaces = this.relevantPlaces.slice(1);
+        this.listedLoadedPlaces = this.relevantPlaces;//.slice(1);
       } else {
         this.relevantPlaces = this.loadedPlaces.filter(
           (place) => place.userId !== userId
         );
-        this.listedLoadedPlaces = this.relevantPlaces.slice(1);
+        this.listedLoadedPlaces = this.relevantPlaces;//.slice(1);
       }
     });
   }
