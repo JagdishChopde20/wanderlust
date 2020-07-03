@@ -1,6 +1,5 @@
 <ion-app>
-  
-  <ion-split-pane when="md" contentId="main">
+  <ion-split-pane contentId="main">
     <!--  the side menu  -->
     <ion-menu side="start" menuId="m1" contentId="main">
       <ion-header>
@@ -10,19 +9,19 @@
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-menu-toggle menu="m1">
+          <ion-menu-toggle menu="m1" auto-hide="false">
             <ion-item lines="none" routerLink="/places/tabs/discover">
               <ion-icon name="business" slot="start"></ion-icon>
               <ion-label>Discover Places</ion-label>
             </ion-item>
           </ion-menu-toggle>
-          <ion-menu-toggle menu="m1">
+          <ion-menu-toggle menu="m1" auto-hide="false">
             <ion-item lines="none" routerLink="/bookings">
               <ion-icon name="checkbox-outline" slot="start"></ion-icon>
               <ion-label>Your Bookings</ion-label>
             </ion-item>
           </ion-menu-toggle>
-          <ion-menu-toggle menu="m1">
+          <ion-menu-toggle menu="m1" auto-hide="false">
             <ion-item lines="none" (click)="onLogout()" button>
               <ion-icon name="exit" slot="start"></ion-icon>
               <ion-label>Logout</ion-label>
