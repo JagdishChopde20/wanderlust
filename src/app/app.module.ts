@@ -15,6 +15,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { environment } from "../environments/environment";
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
+    FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [

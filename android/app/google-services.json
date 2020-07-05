@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "436504344356",
+    "firebase_url": "https://wanderlust-jack.firebaseio.com",
+    "project_id": "wanderlust-jack",
+    "storage_bucket": "wanderlust-jack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436504344356:android:3f5027904cc629b51425b1",
+        "android_client_info": {
+          "package_name": "com.ionic.wanderlust"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "436504344356-9suml9aaiij9cosmpakamuoojn43d3pt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBgVoHcUBy44y8fyoYAU2oK6kJao0y75o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "436504344356-9suml9aaiij9cosmpakamuoojn43d3pt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

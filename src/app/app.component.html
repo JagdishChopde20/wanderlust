@@ -1,4 +1,4 @@
-<ion-app>
+<ion-app [class.dark-theme]="dark">
   <ion-split-pane contentId="main">
     <!--  the side menu  -->
     <ion-menu side="start" menuId="m1" contentId="main">
@@ -9,6 +9,9 @@
       </ion-header>
       <ion-content>
         <ion-list>
+          <ion-list-header>
+            Application
+          </ion-list-header>
           <ion-menu-toggle menu="m1" auto-hide="false">
             <ion-item lines="none" routerLink="/places/tabs/discover">
               <ion-icon name="business" slot="start"></ion-icon>
@@ -21,12 +24,25 @@
               <ion-label>Your Bookings</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-list-header>
+            Account
+          </ion-list-header>
           <ion-menu-toggle menu="m1" auto-hide="false">
             <ion-item lines="none" (click)="onLogout()" button>
               <ion-icon name="exit" slot="start"></ion-icon>
               <ion-label>Logout</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-list-header>
+            Theme
+          </ion-list-header>
+          <ion-item>
+            <ion-icon slot="start" name="moon-outline"></ion-icon>
+            <ion-label>
+              Dark Mode
+            </ion-label>
+            <ion-toggle [(ngModel)]="dark"></ion-toggle>
+          </ion-item>
         </ion-list>
       </ion-content>
     </ion-menu>
